@@ -1,0 +1,80 @@
+﻿@model LostAndFoundSystem.Models.Item
+@{
+    ViewData["Title"] = "Edit Item";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow border-0" style="border-radius:16px">
+                <div class="card-header text-white border-0"
+                     style="background: linear-gradient(135deg,#e67e22,#d35400); border-radius:16px 16px 0 0">
+                    <h4 class="mb-0">✏️ Edit Item</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="ItemId" />
+                        <input type="hidden" asp-for="PhotoPath" />
+                        <input type="hidden" asp-for="DateReported" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Item Name</label>
+                                <input asp-for="ItemName" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select asp-for="Category" class="form-select">
+                                    <option value="Lost">Lost</option>
+                                    <option value="Found">Found</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Location</label>
+                                <input asp-for="Location" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Claimed">Claimed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                        {
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Current Photo</label><br />
+                                <img src="@Model.PhotoPath" style="max-height:150px; border-radius:10px;" />
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">📷 Change Photo (optional)</label>
+                            <input type="file" name="PhotoFile" class="form-control" accept="image/*" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Reported By</label>
+                            <select asp-for="UserId" asp-items="ViewBag.Users" class="form-select"></select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning btn-lg fw-bold">
+                                💾 Update Item
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

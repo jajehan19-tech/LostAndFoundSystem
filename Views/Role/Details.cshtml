@@ -1,0 +1,23 @@
+﻿@model LostAndFoundSystem.Models.Role
+@{
+    ViewData["Title"] = "Role Details";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4>📋 Role Details</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Role ID:</strong> @Model.Id</p>
+                    <p><strong>Role Name:</strong> @Model.RoleName</p>
+                    <p><strong>Description:</strong> @Model.RoleDescription</p>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

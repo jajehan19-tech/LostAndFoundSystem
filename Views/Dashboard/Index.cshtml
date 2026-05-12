@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    string role = ViewBag.UserRole ?? "User";
+}
+
+<div class="container-fluid px-4 mt-4">
+
+    <div class="card border-0 shadow-sm p-4 mb-4"
+         style="background: linear-gradient(135deg, #0f3460, #533483); color: white; border-radius: 16px;">
+        <div class="row align-items-center">
+            <div class="col">
+                <h2 class="fw-bold mb-1">Hello, @ViewBag.UserName! 👋</h2>
+                <p class="mb-0" style="opacity:0.85">
+                    Welcome to Lost & Found System.
+                    @if (role == "Admin")
+                    {
+                        <span class="badge bg-warning text-dark ms-2">⚙️ Admin</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-light text-dark ms-2">👤 User</span>
+                    }
+                </p>
+            </div>
+            <div class="col-auto">
+                <span style="font-size: 60px">🔍</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm text-center p-3" style="border-radius:12px">
+                <h3 class="fw-bold text-primary">@ViewBag.TotalItems</h3>
+                <p class="text-muted mb-0 small">Total Items</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm text-center p-3" style="border-radius:12px">
+                <h3 class="fw-bold text-danger">@ViewBag.LostItems</h3>
+                <p class="text-muted mb-0 small">Lost Items</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm text-center p-3" style="border-radius:12px">
+                <h3 class="fw-bold text-success">@ViewBag.FoundItems</h3>
+                <p class="text-muted mb-0 small">Found Items</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="card border-0 shadow-sm text-center p-3" style="border-radius:12px">
+                <h3 class="fw-bold text-warning">@ViewBag.PendingItems</h3>
+                <p class="text-muted mb-0 small">Pending</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-@(role == "Admin" ? "4" : "6")">
+            <a asp-controller="Item" asp-action="Create" class="text-decoration-none">
+                <div class="card border-0 shadow-sm text-center p-4 h-100"
+                     style="border-radius:16px; border-left: 4px solid #0d6efd !important; transition: transform 0.2s;"
+                     onmouseover="this.style.transform='translateY(-4px)'"
+                     onmouseout="this.style.transform='translateY(0)'">
+                    <div style="font-size:52px">📝</div>
+                    <h5 class="text-primary mt-2 fw-bold">Report Lost Item</h5>
+                    <p class="text-muted small">Submit a report for a lost item</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-@(role == "Admin" ? "4" : "6")">
+            <a asp-controller="Item" asp-action="Index" class="text-decoration-none">
+                <div class="card border-0 shadow-sm text-center p-4 h-100"
+                     style="border-radius:16px; border-left: 4px solid #198754 !important; transition: transform 0.2s;"
+                     onmouseover="this.style.transform='translateY(-4px)'"
+                     onmouseout="this.style.transform='translateY(0)'">
+                    <div style="font-size:52px">🔍</div>
+                    <h5 class="text-success mt-2 fw-bold">View Items</h5>
+                    <p class="text-muted small">Browse all lost and found items</p>
+                </div>
+            </a>
+        </div>
+
+        @if (role == "Admin")
+        {
+            <div class="col-md-4">
+                <a asp-controller="Admin" asp-action="Index" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100"
+                         style="border-radius:16px; border-left: 4px solid #533483 !important; transition: transform 0.2s;"
+                         onmouseover="this.style.transform='translateY(-4px)'"
+                         onmouseout="this.style.transform='translateY(0)'">
+                        <div style="font-size:52px">⚙️</div>
+                        <h5 style="color:#533483" class="mt-2 fw-bold">Admin Panel</h5>
+                        <p class="text-muted small">Manage users, roles and items</p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

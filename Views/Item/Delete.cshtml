@@ -1,0 +1,77 @@
+﻿@model LostAndFoundSystem.Models.Item
+@{
+    ViewData["Title"] = "Delete Item";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0" style="border-radius:16px">
+                <div class="card-header text-white border-0"
+                     style="background: linear-gradient(135deg,#c0392b,#e74c3c);
+                            border-radius:16px 16px 0 0">
+                    <h4 class="mb-0">🗑️ Delete Item</h4>
+                </div>
+                <div class="card-body p-4">
+
+                    @if (!string.IsNullOrEmpty(Model.PhotoPath))
+                    {
+                        <div class="text-center mb-3">
+                            <img src="@Model.PhotoPath"
+                                 style="max-height:160px; border-radius:12px;
+                                            object-fit:cover;" />
+                        </div>
+                    }
+
+                    <table class="table table-borderless">
+                        <tr>
+                            <td class="fw-bold" style="width:140px">Item Name</td>
+                            <td>@Model.ItemName</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Category</td>
+                            <td>
+                                <span class="badge @(Model.Category == "Lost" ?
+                                                                          "bg-danger" : "bg-success")">
+                                    @Model.Category
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Location</td>
+                            <td>@Model.Location</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Status</td>
+                            <td>@Model.Status</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Date Reported</td>
+                            <td>@Model.DateReported.ToShortDateString()</td>
+                        </tr>
+                    </table>
+
+                    <div class="alert alert-danger mt-2" style="border-radius:10px">
+                        ⚠️ Are you sure you want to delete this item?
+                        This action <strong>cannot be undone</strong>.
+                    </div>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="ItemId" />
+                        <div class="d-flex gap-2">
+                            <button type="submit"
+                                    class="btn btn-danger fw-bold flex-fill">
+                                Yes, Delete
+                            </button>
+                            <a asp-action="Index"
+                               class="btn btn-secondary flex-fill text-center">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

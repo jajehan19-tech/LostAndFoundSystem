@@ -1,0 +1,65 @@
+﻿@model IEnumerable<LostAndFoundSystem.Models.Item>
+@{
+    ViewData["Title"] = "Item List";
+    string role = Context.Session.GetString("UserRole") ?? "User";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">🔍 Lost & Found Items</h2>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Photo</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.PhotoPath))
+                        {
+                            <img src="@item.PhotoPath"
+                                 style="width:60px; height:60px; object-fit:cover; border-radius:8px;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted small">No photo</span>
+                        }
+                    </td>
+                    <td class="fw-bold">@item.ItemName</td>
+                    <td>
+                        <span class="badge @(item.Category == "Lost" ? "bg-danger" : "bg-success")">
+                            @item.Category
+                        </span>
+                    </td>
+                    <td>@item.Location</td>
+                    <td>
+                        <span class="badge @(item.Status == "Pending" ? "bg-warning text-dark" : "bg-success")">
+                            @item.Status
+                        </span>
+                    </td>
+                    <td>@item.DateReported.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ItemId"
+                           class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Edit" asp-route-id="@item.ItemId"
+                           class="btn btn-warning btn-sm">Edit</a>
+                        @if (role == "Admin")
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.ItemId"
+                               class="btn btn-danger btn-sm">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

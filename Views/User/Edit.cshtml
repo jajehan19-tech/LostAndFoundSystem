@@ -1,0 +1,43 @@
+﻿@model LostAndFoundSystem.Models.User
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4>✏️ Edit User</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="UserId" />
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">UserName</label>
+                                <input asp-for="UserName" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Role</label>
+                                <select asp-for="RoleId" asp-items="ViewBag.Roles" class="form-select"></select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Address</label>
+                                <input asp-for="Address" class="form-control" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Update User</button>
+                        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

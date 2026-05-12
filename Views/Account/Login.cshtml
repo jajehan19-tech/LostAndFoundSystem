@@ -1,0 +1,172 @@
+﻿@model LostAndFoundSystem.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Lost & Found</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            font-size: 48px;
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin: 10px 0 4px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1.5px solid #e5e5e5;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+            .form-control:focus {
+                border-color: #533483;
+                box-shadow: 0 0 0 3px rgba(83,52,131,0.1);
+            }
+
+        .btn-login {
+            background: linear-gradient(135deg, #0f3460, #533483);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+            .btn-login:hover {
+                opacity: 0.88;
+                color: white;
+            }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+            color: #ccc;
+            font-size: 13px;
+        }
+
+            .divider::before, .divider::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: #e5e5e5;
+            }
+
+        .btn-register {
+            display: block;
+            text-align: center;
+            border: 2px solid #533483;
+            color: #533483;
+            border-radius: 12px;
+            padding: 13px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+            .btn-register:hover {
+                background: #533483;
+                color: white;
+            }
+
+        .alert-danger {
+            border-radius: 10px;
+            font-size: 14px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="logo">🔍</div>
+        <div class="title">Lost & Found</div>
+        <div class="subtitle">Sign in to your account</div>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary(true)
+            </div>
+        }
+
+        <form asp-action="Login" method="post">
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn-login">Sign In</button>
+        </form>
+
+        <div class="divider">or</div>
+
+        <a href="/Account/Register" class="btn-register">
+            Don't have an account? Create one
+        </a>
+    </div>
+</body>
+</html>

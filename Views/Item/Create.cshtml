@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Report Item";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow border-0" style="border-radius:16px">
+                <div class="card-header text-white border-0"
+                     style="background: linear-gradient(135deg,#0f3460,#533483); border-radius:16px 16px 0 0">
+                    <h4 class="mb-0">📝 Report Lost / Found Item</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" enctype="multipart/form-data" action="/Item/Create">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Item Name</label>
+                                <input type="text" name="ItemName" class="form-control" placeholder="e.g. Black Wallet" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Category</label>
+                                <select name="Category" class="form-select" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Lost">Lost</option>
+                                    <option value="Found">Found</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description</label>
+                            <textarea name="Description" class="form-control" rows="3"
+                                      placeholder="Describe the item in detail..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Location</label>
+                                <input type="text" name="Location" class="form-control"
+                                       placeholder="Where was it lost/found?" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <select name="Status" class="form-select">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Claimed">Claimed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">📷 Upload Photo (optional)</label>
+                            <input type="file" name="PhotoFile" class="form-control" accept="image/*" />
+                            <small class="text-muted">Upload a photo of the item to help identify it</small>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                💾 Save Item
+                            </button>
+                            <a href="/Item/Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

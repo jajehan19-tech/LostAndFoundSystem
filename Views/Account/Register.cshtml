@@ -1,0 +1,186 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Lost & Found</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .register-box {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            font-size: 48px;
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin: 10px 0 4px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 13px 16px;
+            border: 1.5px solid #e5e5e5;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+            .form-control:focus {
+                border-color: #533483;
+                box-shadow: 0 0 0 3px rgba(83,52,131,0.1);
+            }
+
+        .btn-create {
+            background: linear-gradient(135deg, #0f3460, #533483);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+            .btn-create:hover {
+                opacity: 0.88;
+                color: white;
+            }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            color: #ccc;
+            font-size: 13px;
+        }
+
+            .divider::before, .divider::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: #e5e5e5;
+            }
+
+        .btn-login-link {
+            display: block;
+            text-align: center;
+            border: 2px solid #533483;
+            color: #533483;
+            border-radius: 12px;
+            padding: 13px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+            .btn-login-link:hover {
+                background: #533483;
+                color: white;
+            }
+
+        .role-badge {
+            display: inline-block;
+            background: #f0f4ff;
+            color: #533483;
+            border: 1.5px solid #c5cff5;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-box">
+        <div class="logo">🔍</div>
+        <div class="title">Create Account</div>
+        <div class="subtitle">Lost & Found System</div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="border-radius:10px; font-size:14px; padding:10px 14px; margin-bottom:16px;">
+                ⚠️ @ViewBag.Error
+            </div>
+        }
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input name="UserName" class="form-control" placeholder="Enter your name" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input name="Email" type="email" class="form-control" placeholder="Enter your email" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input name="Password" type="password" class="form-control" placeholder="Create a password" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <input name="Address" class="form-control" placeholder="Enter your address" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Account Type</label><br />
+                <span class="role-badge">👤 User Account</span>
+                <div class="text-muted mt-1" style="font-size:12px;">
+                    All new accounts are registered as Users.
+                </div>
+            </div>
+            <button type="submit" class="btn-create">Create Account</button>
+        </form>
+
+        <div class="divider">or</div>
+        <a href="/Account/Login" class="btn-login-link">Already have an account? Sign in</a>
+    </div>
+</body>
+</html>
